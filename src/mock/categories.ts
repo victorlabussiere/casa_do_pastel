@@ -1,4 +1,4 @@
-import { PlateGroups, PlatesKinds } from "../../../plates"
+import { PlateGroups, PlatesKinds } from "./plates"
 
 export type Category = {
     title: string,
