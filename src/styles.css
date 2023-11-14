@@ -5,11 +5,15 @@
 /*ANGULAR SELECTORS*/
 @layer base {
   app-home {
-    @apply w-full;
+    @apply w-full flex items-start pt-20;
+    height: 88vh;
   }
 }
 
 @layer base {
+  .hideElement {
+    @apply bg-transparent hidden invisible;
+  }
   .swingUp {
     @apply hover:-translate-y-0.5 duration-150;
   }
@@ -30,7 +34,7 @@
     @apply px-32 py-12;
   }
   section {
-    @apply flex justify-between w-full;
+    @apply flex justify-between w-8/12 mx-auto;
   }
 
   h2 {
