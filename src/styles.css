@@ -1,1 +1,59 @@
-/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*ANGULAR SELECTORS*/
+@layer base {
+  app-home {
+    @apply w-full;
+  }
+}
+
+@layer base {
+  .swingUp {
+    @apply hover:-translate-y-0.5 duration-150;
+  }
+  .swingLeft {
+    @apply hover:-translate-x-0.5 duration-150;
+  }
+  .swingRight {
+    @apply hover:translate-x-0.5 duration-150;
+  }
+  body {
+    position: relative;
+    min-height: 100vh;
+    width: 100vw;
+  }
+  main {
+    @apply w-screen h-full;
+    @apply flex flex-col items-center justify-start;
+    @apply px-32 py-12;
+  }
+  section {
+    @apply flex justify-between w-full;
+  }
+
+  h2 {
+    @apply font-semibold text-3xl;
+  }
+}
+
+@layer components {
+  .topbar {
+    @apply absolute top-0 left-0 w-screen px-32;
+    @apply flex items-center justify-between;
+    @apply bg-red-500 text-gray-200;
+  }
+
+  .topbar_logo {
+    @apply swingUp;
+  }
+
+  .topbar_links {
+    @apply flex items-center justify-between gap-20;
+  }
+  .topbar_links > li {
+    @apply px-1 py-3;
+    @apply swingUp;
+  }
+}
