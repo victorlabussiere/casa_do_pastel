@@ -34,7 +34,7 @@
     @apply px-32 py-12;
   }
   section {
-    @apply flex justify-between w-8/12 mx-auto;
+    @apply flex justify-between w-full h-full;
   }
 
   h2 {

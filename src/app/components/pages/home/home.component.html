@@ -1,29 +1,41 @@
-<section class="flex-col gap-10">
-  <header class="flex flex-col gap-2 border-b-2 m-3 py-3">
-    <h1 class="font-bold text-6xl text-gray-700">Casa do Pastel</h1>
-    <p class="font-semibold italic">
-      Pastéis, Tapiocas e Açais feitos na hora!
-    </p>
-  </header>
+<section class="relative max-w-3xl mx-auto">
+  <div class="flex-col gap-10 w-full">
+    <header class="flex flex-col gap-2 border-b-2 m-3 py-3">
+      <h1 class="font-bold text-6xl text-gray-700">Casa do Pastel</h1>
+      <p class="font-semibold italic">
+        Pastéis, Tapiocas e Açais feitos na hora!
+      </p>
+    </header>
 
-  <ul class="flex flex-col gap-8">
-    <li
-      class="flex gap-6 items-center w-full p-3 border-transparent border-b-2 hover:border-red-500 duration-150"
-      *ngFor="let category of categories; index as i"
-    >
-      <img
-        src="{{ category.img_url }}"
-        class="w-10 h-10"
-        alt="{{ category.description }}"
-      />
+    <ul class="flex flex-col gap-8">
+      <li
+        class="flex gap-6 items-center w-full p-3 border-transparent border-b-2 hover:border-red-500 duration-150"
+        *ngFor="let category of categories; index as i"
+      >
+        <img
+          src="{{ category.img_url }}"
+          class="w-10 h-10"
+          alt="{{ category.description }}"
+        />
 
-      <span class="flex flex-col w-full">
-        <h3 class="font-semibold text-amber-500">{{ category.title }}</h3>
-        <p class="italic text-sm text-gray-600">{{ category.description }}</p>
-        <button class="text-red-500 font-semibold ml-auto hover:swingRight">
-          Ver mais
-        </button>
-      </span>
-    </li>
-  </ul>
+        <span class="flex flex-col w-full">
+          <h3 class="font-semibold text-amber-500">{{ category.title }}</h3>
+          <p class="italic text-sm text-gray-600">{{ category.description }}</p>
+          <button
+            class="text-red-500 font-semibold ml-auto hover:swingRight"
+            (click)="toggleDisplay()"
+          >
+            Ver mais
+          </button>
+        </span>
+      </li>
+    </ul>
+  </div>
+
+  <div
+    class="platesTemplate bg-white border w-full h-full absolute top-0 left-0 hideElement"
+  >
+    <i class="material-icons cursor-pointer" (click)="toggleDisplay()">close</i>
+    Plates list
+  </div>
 </section>

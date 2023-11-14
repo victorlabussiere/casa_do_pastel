@@ -19,6 +19,12 @@ export class HomeComponent implements OnInit {
     return this.categoryServices.getAllCategories()
   }
 
+  toggleDisplay() {
+    let query = 'div.platesTemplate'
+    let hideClass = 'hideElement'
+    this.browserFunctions.toggleDisplay(query, hideClass)
+  }
+
   ngOnInit(): void {
     this.getAllCategories()
       .subscribe(categories => this.categories = categories)
