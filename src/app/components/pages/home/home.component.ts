@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FunctionsService } from 'src/app/providers/browserFunctions/functions.service';
 import { CategoryService } from 'src/app/providers/categories/category.service';
 import { PlatesService } from 'src/app/providers/plates/plates.service';
-import { Category } from 'src/mock/categories';
-import { Plate, PlateGroups } from 'src/mock/plates';
+import { Category, CategoryInfo } from 'src/mock/categories';
+import { Plate, PlateGroups, PlatesKinds } from 'src/mock/plates';
 
 @Component({
   selector: 'app-home',
@@ -12,9 +12,7 @@ import { Plate, PlateGroups } from 'src/mock/plates';
 export class HomeComponent implements OnInit {
   categories!: Category[]
   plates!: Plate[]
-
-  filteredPlates!: Plate[]
-  filterGroup!: PlateGroups
+  groupFilter: string = 'pastel'
 
   constructor(
     private categoryServices: CategoryService,
@@ -22,33 +20,19 @@ export class HomeComponent implements OnInit {
     private browserFunctions: FunctionsService
   ) { }
 
-  private getAllCategories() {
+  private _getAllCategories() {
     return this.categoryServices.getAllCategories()
   }
 
-  private getPlates() {
-    return this.platesServices.getAllPlates()
-  }
-
-  setPlates(group: PlateGroups) {
-    this.getPlates().subscribe(plates => {
-      this.plates = plates.filter(plate => plate.category.group == group)
-    })
-  }
-
-  toggleDisplay() {
-    let query = 'div.platesTemplate'
-    let hideClass = 'hideElement'
-    this.browserFunctions.toggleDisplay(query, hideClass)
-
+  setGroupFilter(group: string) {
+    this.groupFilter = group
     return this
   }
 
   ngOnInit(): void {
-    this.getAllCategories()
+    this._getAllCategories()
       .subscribe(categories => this.categories = categories)
 
+    this.platesServices.getAllPlates().subscribe(plate => this.plates = plate)
   }
-
-
 }

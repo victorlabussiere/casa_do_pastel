@@ -1,54 +1,39 @@
-<section class="relative max-w-3xl mx-auto">
-  <div class="flex-col gap-10 w-full">
-    <header class="flex flex-col gap-2 border-b-2 m-3 py-3">
-      <h1 class="font-bold text-6xl text-gray-700">Casa do Pastel</h1>
-      <p class="font-semibold italic">
-        Pastéis, Tapiocas e Açais feitos na hora!
-      </p>
-    </header>
+<section class="relative max-w-6xl mx-auto flex flex-col gap-10">
+  <header class="flex flex-col gap-2 border-b-2 m-3 py-3">
+    <h1 class="font-bold text-6xl text-gray-700">Casa do Pastel</h1>
+    <p class="font-semibold italic">
+      Pastéis, Tapiocas e Açais feitos na hora!
+    </p>
+  </header>
 
-    <ul class="flex flex-col gap-8">
-      <li
-        class="flex gap-6 items-center w-full p-3 border-transparent border-b-2 hover:border-red-500 duration-150"
-        *ngFor="let category of categories; index as i"
-      >
-        <img
-          src="{{ category.img_url }}"
-          class="w-10 h-10"
-          alt="{{ category.description }}"
-        />
+  <ul class="flex w-full gap-6 my-auto">
+    <li
+      class="flex gap-6 items-center w-full p-3 border-transparent border-b-2 hover:border-red-500 duration-150 border-gray-400"
+      *ngFor="let category of categories; index as i"
+    >
+      <img
+        src="{{ category.img_url }}"
+        class="w-10 h-10"
+        alt="{{ category.description }}"
+      />
 
-        <span class="flex flex-col w-full">
-          <h3 class="font-semibold text-amber-500">{{ category.title }}</h3>
-          <p class="italic text-sm text-gray-600">{{ category.description }}</p>
-          <button
-            class="text-red-500 font-semibold ml-auto hover:swingRight"
-            (click)="toggleDisplay().setPlates(category.category.group)"
-          >
-            Ver mais
-          </button>
-        </span>
-      </li>
-    </ul>
-  </div>
+      <span class="flex flex-col w-full">
+        <h3 class="font-semibold text-amber-500">{{ category.title }}</h3>
+        <p class="italic text-sm text-gray-600">{{ category.description }}</p>
+        <button
+          class="text-red-500 font-semibold ml-auto hover:swingRight"
+          (click)="setGroupFilter(category.info.group)"
+        >
+          Ver mais
+        </button>
+      </span>
+    </li>
+  </ul>
 
-  <div
-    class="platesTemplate bg-white w-full h-full absolute top-0 left-0 hideElement"
+  <app-menu
+    class="bg-white w-full h-full flex flex-col gap-5"
+    [plates]="plates"
+    [groupFilter]="groupFilter"
   >
-    <header class="flex items-center w-full gap-3">
-      <i class="material-icons cursor-pointer" (click)="toggleDisplay()">
-        close
-      </i>
-      <h1>Confira nossas opções</h1>
-    </header>
-
-    <ul class="flex flex-col gap-3">
-      <li *ngFor="let plate of plates; index as i" class="border rounded p-3">
-        <p>Nome: {{ plate.title }}</p>
-        <p>Descrição: {{ plate.description }}</p>
-        <p>Grupo: {{ plate.category.group }}</p>
-        <p>Tipo: {{ plate.category.kind }}</p>
-      </li>
-    </ul>
-  </div>
+  </app-menu>
 </section>
