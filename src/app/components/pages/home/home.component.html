@@ -1,39 +1,30 @@
-<section class="relative max-w-6xl mx-auto flex flex-col gap-10">
-  <header class="flex flex-col gap-2 border-b-2 m-3 py-3">
-    <h1 class="font-bold text-6xl text-gray-700">Casa do Pastel</h1>
-    <p class="font-semibold italic">
-      Pastéis, Tapiocas e Açais feitos na hora!
-    </p>
+<section class="homepage">
+  <header class="homepage_header">
+    <h1>Casa do Pastel</h1>
+    <h3>Pastéis, Tapiocas e Açais feitos na hora!</h3>
   </header>
-
-  <ul class="flex w-full gap-6 my-auto">
+  <ul class="categories">
     <li
-      class="flex gap-6 items-center w-full p-3 border-transparent border-b-2 hover:border-red-500 duration-150 border-gray-400"
       *ngFor="let category of categories; index as i"
+      (click)="setGroupFilter(category.info.group)"
+      class="card {{ setStyle(category.info.group, 'border') }}
+    "
     >
       <img
         src="{{ category.img_url }}"
-        class="w-10 h-10"
+        class="card_img"
         alt="{{ category.description }}"
       />
-
-      <span class="flex flex-col w-full">
-        <h3 class="font-semibold text-amber-500">{{ category.title }}</h3>
-        <p class="italic text-sm text-gray-600">{{ category.description }}</p>
-        <button
-          class="text-red-500 font-semibold ml-auto hover:swingRight"
-          (click)="setGroupFilter(category.info.group)"
-        >
-          Ver mais
-        </button>
+      <span class="card_body">
+        <h3 class="{{ setStyle(category.info.group, 'text') }} font-semibold">
+          {{ category.title }}
+        </h3>
+        <p class="card_description">
+          {{ category.description }}
+        </p>
       </span>
     </li>
   </ul>
 
-  <app-menu
-    class="bg-white w-full h-full flex flex-col gap-5"
-    [plates]="plates"
-    [groupFilter]="groupFilter"
-  >
-  </app-menu>
+  <app-menu [plates]="plates" [groupFilter]="groupFilter"> </app-menu>
 </section>

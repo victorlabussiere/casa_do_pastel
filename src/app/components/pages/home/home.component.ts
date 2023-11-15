@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FunctionsService } from 'src/app/providers/browserFunctions/functions.service';
 import { CategoryService } from 'src/app/providers/categories/category.service';
 import { PlatesService } from 'src/app/providers/plates/plates.service';
-import { Category, CategoryInfo } from 'src/mock/categories';
-import { Plate, PlateGroups, PlatesKinds } from 'src/mock/plates';
+import { Category } from 'src/mock/categories';
+import { Plate, PlateGroups } from 'src/mock/plates';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +16,6 @@ export class HomeComponent implements OnInit {
   constructor(
     private categoryServices: CategoryService,
     private platesServices: PlatesService,
-    private browserFunctions: FunctionsService
   ) { }
 
   private _getAllCategories() {
@@ -27,6 +25,15 @@ export class HomeComponent implements OnInit {
   setGroupFilter(group: string) {
     this.groupFilter = group
     return this
+  }
+  setStyle(category: string, target: string) {
+    const filterColors: any = {
+      pastel: 'pastel',
+      tapioca: 'tapioca',
+      acai: 'acai'
+    };
+
+    return category === this.groupFilter ? filterColors[category] : `${target}-gray-500`;
   }
 
   ngOnInit(): void {
