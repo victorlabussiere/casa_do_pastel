@@ -1,9 +1,28 @@
-<header class="flex items-center justify-between w-full">
-  <!-- <i class="material-icons cursor-pointer" (click)="toggleDisplay()"> close </i> -->
-  <h3>Confira nossas opções:</h3>
-  <nav *ngIf="groupFilter != 'acai'" class="flex gap-3">
-    <button (click)="setKindFilter('salgado')">salgado</button>
-    <button (click)="setKindFilter('doce')">doce</button>
+<header class="flex items-baseline justify-between w-full">
+  <h3
+    *ngIf="groupFilter != 'acai'; else saltPlates"
+    class="{{ setStyleByKind(kindFilter) }} italic"
+  >
+    {{ setTitleByGroup(groupFilter, kindFilter) }}
+  </h3>
+
+  <ng-template #saltPlates>
+    <h3 class="text-purple-400 italic">Escolha seu Açaí</h3>
+  </ng-template>
+
+  <nav *ngIf="groupFilter != 'acai'" class="flex gap-10">
+    <button
+      class="{{ setStyleByKind('salgado') }} font-semibold"
+      (click)="setKindFilter('salgado')"
+    >
+      Salgados
+    </button>
+    <button
+      class="{{ setStyleByKind('doce') }} font-semibold"
+      (click)="setKindFilter('doce')"
+    >
+      Doces
+    </button>
   </nav>
 </header>
 

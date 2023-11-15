@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { FunctionsService } from 'src/app/providers/browserFunctions/functions.service';
 import { PlatesService } from 'src/app/providers/plates/plates.service';
 import { Plate, PlateGroups, PlatesKinds } from 'src/types';
 
@@ -9,7 +8,6 @@ import { Plate, PlateGroups, PlatesKinds } from 'src/types';
 })
 export class MenuComponent {
   @Input() plates!: Plate[]
-
   @Input() groupFilter!: PlateGroups | string
   kindFilter: PlatesKinds = 'salgado'
 
@@ -17,11 +15,36 @@ export class MenuComponent {
   tapiocaList!: Plate[]
   acaiList!: Plate[]
 
-  constructor(
-    private platesServices: PlatesService
-  ) {
+  constructor(private platesServices: PlatesService) {
     this._initPlates()
     this._setLists()
+  }
+
+  setStyleByKind(kind: string) {
+    const filterColors: any = {
+      salgado: 'text-red-400',
+      doce: 'text-blue-400'
+    }
+
+    return kind === this.kindFilter ? filterColors[kind] : 'text-gray-500'
+  }
+
+  setTitleByGroup(group: string, kind: string) {
+    const titles: any = {
+      pastel: {
+        salgado: "Pastéis Salgados",
+        doce: "Pastéis Doces"
+      },
+      tapioca: {
+        salgado: "Tapiocas Salgadas",
+        doce: "Tapiocas Doces"
+      },
+      acai: {
+        doce: "Açaí",
+      }
+    }
+
+    return group === this.groupFilter ? titles[group][kind] : 'Selecione um item'
   }
 
   private _initPlates() {
@@ -37,6 +60,10 @@ export class MenuComponent {
   }
 
   setKindFilter(kind: PlatesKinds) {
+    if (this.groupFilter === 'acai') {
+      this.kindFilter = 'doce'
+    }
+
     this.kindFilter = kind
     this._setLists()
   }
