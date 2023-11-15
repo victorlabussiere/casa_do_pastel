@@ -1,16 +1,4 @@
-
-export type PlateGroups = 'pastel' | 'tapioca' | 'acai'
-export type PlatesKinds = 'doce' | 'salgado'
-
-export type Plate = {
-    id: number,
-    title: string,
-    description: string,
-    category: {
-        kind: PlatesKinds
-        group: PlateGroups
-    }
-}
+import { Plate } from "src/types";
 
 export const PLATES: Plate[] = [
     {

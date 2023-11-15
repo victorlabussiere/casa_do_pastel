@@ -47,6 +47,10 @@
   h2 {
     @apply font-semibold text-3xl;
   }
+
+  h3 {
+    @apply font-semibold text-2xl;
+  }
   .topbar {
     @apply absolute top-0 left-0 w-screen px-32;
     @apply flex items-center justify-between;

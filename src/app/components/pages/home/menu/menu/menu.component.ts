@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { FunctionsService } from 'src/app/providers/browserFunctions/functions.service';
 import { PlatesService } from 'src/app/providers/plates/plates.service';
-import { Plate, PlateGroups, PlatesKinds } from 'src/mock/plates';
+import { Plate, PlateGroups, PlatesKinds } from 'src/types';
 
 @Component({
   selector: 'app-menu',
@@ -18,7 +18,6 @@ export class MenuComponent {
   acaiList!: Plate[]
 
   constructor(
-    private browserFunctions: FunctionsService,
     private platesServices: PlatesService
   ) {
     this._initPlates()

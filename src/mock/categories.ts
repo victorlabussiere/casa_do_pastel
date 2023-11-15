@@ -1,17 +1,4 @@
-import { PlateGroups, PlatesKinds } from "./plates"
-
-export type Category = {
-    title: string,
-    description: string,
-    img_url: string,
-    info: CategoryInfo
-}
-
-export type CategoryInfo = {
-    kind: PlatesKinds,
-    group: PlateGroups,
-    name: string
-}
+import { Category } from "src/types"
 
 export const CATEGORIES: Category[] = [
     {

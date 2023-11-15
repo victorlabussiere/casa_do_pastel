@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { of, Observable } from 'rxjs'
-import { PLATES, Plate } from 'src/mock/plates';
+import { PLATES } from 'src/mock/plates';
+import { Plate } from 'src/types';
 
 @Injectable({
   providedIn: 'root'

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoryService } from 'src/app/providers/categories/category.service';
 import { PlatesService } from 'src/app/providers/plates/plates.service';
-import { Category } from 'src/mock/categories';
-import { Plate, PlateGroups } from 'src/mock/plates';
+import { Category, Plate } from 'src/types';
 
 @Component({
   selector: 'app-home',
