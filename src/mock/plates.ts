@@ -8,7 +8,8 @@ export const PLATES: Plate[] = [
         category: {
             kind: 'salgado',
             group: 'pastel'
-        }
+        },
+        price: 10
     },
     {
         id: 2,
@@ -17,7 +18,8 @@ export const PLATES: Plate[] = [
         category: {
             kind: 'salgado',
             group: 'pastel'
-        }
+        },
+        price: 10
     },
     {
         id: 3,
@@ -26,7 +28,8 @@ export const PLATES: Plate[] = [
         category: {
             kind: 'doce',
             group: 'pastel'
-        }
+        },
+        price: 10
     },
     {
         id: 4,
@@ -35,7 +38,8 @@ export const PLATES: Plate[] = [
         category: {
             kind: 'doce',
             group: 'pastel'
-        }
+        },
+        price: 10
     },
     {
         id: 5,
@@ -44,7 +48,8 @@ export const PLATES: Plate[] = [
         category: {
             kind: 'doce',
             group: 'tapioca'
-        }
+        },
+        price: 10
     },
     {
         id: 6,
@@ -53,7 +58,8 @@ export const PLATES: Plate[] = [
         category: {
             kind: 'doce',
             group: 'tapioca'
-        }
+        },
+        price: 10
     },
     {
         id: 7,
@@ -62,7 +68,8 @@ export const PLATES: Plate[] = [
         category: {
             kind: 'salgado',
             group: 'tapioca'
-        }
+        },
+        price: 10
     },
     {
         id: 8,
@@ -71,7 +78,8 @@ export const PLATES: Plate[] = [
         category: {
             kind: 'salgado',
             group: 'tapioca'
-        }
+        },
+        price: 10
     },
     {
         id: 9,
@@ -80,7 +88,8 @@ export const PLATES: Plate[] = [
         category: {
             kind: 'doce',
             group: 'acai'
-        }
+        },
+        price: 10
     },
     {
         id: 10,
@@ -89,6 +98,7 @@ export const PLATES: Plate[] = [
         category: {
             kind: 'doce',
             group: 'acai'
-        }
+        },
+        price: 10
     },
 ]

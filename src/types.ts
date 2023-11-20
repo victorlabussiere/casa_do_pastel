@@ -22,5 +22,6 @@ export type Plate = {
     category: {
         kind: PlatesKinds
         group: PlateGroups
-    }
+    },
+    price: number
 }
