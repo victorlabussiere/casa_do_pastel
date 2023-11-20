@@ -35,16 +35,39 @@
           plate.category.kind === kindFilter;
         else acaiMenu
       "
+      class="text-gray-400 hover:text-gray-700 text-opacity-50 hover:text-opacity-100 hover:bg-gray-50"
     >
-      <h4>{{ plate.title }}</h4>
-      <p>{{ plate.description }}</p>
+      <h4 class="{{ setStyleByKind(kindFilter) }}">
+        {{ plate.title }}
+      </h4>
+      <span
+        class="flex justify-between w-full items-center text-gray-500 hover:text-gray-700 duration-150 cursor-default"
+      >
+        <p class="w-3/5 text-ellipsis">{{ plate.description }}</p>
+        <button
+          class="material-icons cursor-pointer hover:swingUp hover:text-3xl"
+        >
+          shopping_cart
+        </button>
+      </span>
     </li>
 
     <ng-template #acaiMenu>
       <li *ngIf="groupFilter === 'acai' && plate.category.group == 'acai'">
-        <h4>{{ plate.title }}</h4>
-        <p>{{ plate.description }}</p>
-      </li>
-    </ng-template>
+        <h4 class="text-purple-600">
+          {{ plate.title }}
+        </h4>
+        <span
+          class="flex justify-between w-full items-center text-gray-500 hover:text-gray-700 duration-150 cursor-default"
+        >
+          <p class="w-3/5 text-ellipsis">{{ plate.description }}</p>
+          <button
+            class="material-icons cursor-pointer hover:swingUp hover:text-3xl"
+          >
+            shopping_cart
+          </button>
+        </span>
+      </li></ng-template
+    >
   </ng-container>
 </ul>
