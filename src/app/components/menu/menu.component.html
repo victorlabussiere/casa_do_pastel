@@ -26,21 +26,25 @@
   </nav>
 </header>
 
-<ul *ngIf="plates && groupFilter == 'pastel'">
-  <li *ngFor="let plate of pastelList">
-    <h4>{{ plate.title }}</h4>
-    <p>{{ plate.description }}</p>
-  </li>
-</ul>
-<ul *ngIf="plates && groupFilter == 'tapioca'">
-  <li *ngFor="let plate of tapiocaList">
-    <h4>{{ plate.title }}</h4>
-    <p>{{ plate.description }}</p>
-  </li>
-</ul>
-<ul *ngIf="plates && groupFilter == 'acai'">
-  <li *ngFor="let plate of acaiList">
-    <h4>{{ plate.title }}</h4>
-    <p>{{ plate.description }}</p>
-  </li>
+<ul>
+  <ng-container *ngFor="let plate of plates">
+    <li
+      *ngIf="
+        plate.category.group !== 'acai' &&
+          plate.category.group === groupFilter &&
+          plate.category.kind === kindFilter;
+        else acaiMenu
+      "
+    >
+      <h4>{{ plate.title }}</h4>
+      <p>{{ plate.description }}</p>
+    </li>
+
+    <ng-template #acaiMenu>
+      <li *ngIf="groupFilter === 'acai' && plate.category.group == 'acai'">
+        <h4>{{ plate.title }}</h4>
+        <p>{{ plate.description }}</p>
+      </li>
+    </ng-template>
+  </ng-container>
 </ul>
