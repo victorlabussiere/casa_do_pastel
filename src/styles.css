@@ -17,8 +17,13 @@
     @apply hover:translate-x-0.5 duration-150;
   }
 
-  .animationFadeIn {
-    animation: fadeIn;
+  .modalBackgroundAnimation {
+    animation: modalBlur;
+    animation-duration: 600ms;
+  }
+
+  .modalContainerAnimation {
+    animation: showUp;
     animation-duration: 300ms;
   }
   .animationOpenUp {
@@ -162,7 +167,16 @@
   }
 }
 
-@keyframes fadeIn {
+@keyframes modalBlur {
+  from {
+    backdrop-filter: blur(0);
+  }
+  to {
+    backdrop-filter: blur(4px);
+  }
+}
+
+@keyframes showUp {
   from {
     opacity: 0;
     margin-top: 48px;
