@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CartService } from 'src/app/providers/cart/cart.service';
 import { CategoryService } from 'src/app/providers/categories/category.service';
 import { PlatesService } from 'src/app/providers/plates/plates.service';
 import { Category, Plate } from 'src/types';
@@ -14,6 +15,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private categoryServices: CategoryService,
     private platesServices: PlatesService,
+    private cartService: CartService
   ) { }
 
   private _getAllCategories() {
@@ -32,6 +34,10 @@ export class HomeComponent implements OnInit {
     };
 
     return category === this.groupFilter ? filterColors[category] : `${target}-gray-500`;
+  }
+
+  getCartItems() {
+    return this.cartService.getAll()
   }
 
   ngOnInit(): void {

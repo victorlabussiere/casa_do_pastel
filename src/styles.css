@@ -21,6 +21,15 @@
     animation: fadeIn;
     animation-duration: 300ms;
   }
+  .animationOpenUp {
+    animation: openUp;
+    animation-duration: 300ms;
+  }
+
+  *:read-only,
+  input {
+    @apply focus-visible:outline-none;
+  }
 
   body {
     position: relative;
@@ -144,6 +153,12 @@
 @layer components {
   app-cart-list {
     @apply absolute bottom-0 right-32 w-3/12 bg-white h-fit shadow-2xl flex flex-col;
+    animation: openUp;
+    animation-duration: 300ms;
+  }
+
+  .cart-list-maxHeight {
+    max-height: 64%vh;
   }
 }
 
@@ -155,5 +170,14 @@
   to {
     opacity: 1;
     margin-top: 0;
+  }
+}
+
+@keyframes openUp {
+  from {
+    bottom: -40px;
+  }
+  to {
+    bottom: 0;
   }
 }

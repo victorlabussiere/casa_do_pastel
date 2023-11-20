@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { CartService } from 'src/app/providers/cart/cart.service';
 import { CostumerPlate } from 'src/entity/CostumerPlate';
 import { OrderForm, Plate, PlateGroups, PlatesKinds } from 'src/types';
 
@@ -18,9 +19,9 @@ export class MenuComponent {
   modalDisplay: boolean = false
   modalPlate: Plate = {} as Plate
 
-  formOrder: OrderForm = { quantity: 1, observations: "Sem observações" } as OrderForm
+  formOrder: OrderForm = { quantity: 1, observations: "" } as OrderForm
 
-  constructor() { }
+  constructor(private cartService: CartService) { }
 
   openModal(plate: Plate) {
     this.modalDisplay = true
@@ -69,8 +70,9 @@ export class MenuComponent {
 
   addToCart(plate: Plate) {
     const finalPlate = new CostumerPlate(plate, this.formOrder)
-
-    console.log('preço atualizado', finalPlate.price)
-    console.log(finalPlate)
+    this.cartService.add(finalPlate)
+    this.modalDisplay = !this.modalDisplay
+    this.formOrder.observations = ''
+    this.formOrder.quantity = 1
   }
 }
