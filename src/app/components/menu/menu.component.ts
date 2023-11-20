@@ -1,11 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Plate, PlateGroups, PlatesKinds } from 'src/types';
-
-export type CostumerForm = {
-  name: string,
-  quantity: number,
-  observations: string
-}
+import { CostumerPlate } from 'src/entity/CostumerPlate';
+import { OrderForm, Plate, PlateGroups, PlatesKinds } from 'src/types';
 
 @Component({
   selector: 'app-menu',
@@ -23,7 +18,7 @@ export class MenuComponent {
   modalDisplay: boolean = false
   modalPlate: Plate = {} as Plate
 
-  order: CostumerForm = {} as CostumerForm
+  formOrder: OrderForm = { quantity: 1, observations: "Sem observações" } as OrderForm
 
   constructor() { }
 
@@ -39,8 +34,8 @@ export class MenuComponent {
 
   setStyleByKind(kind: string) {
     const filterColors: any = {
-      salgado: 'text-red-400',
-      doce: 'text-blue-400'
+      salgado: 'text-amber-600',
+      doce: 'text-pink-500'
     }
 
     return kind === this.kindFilter ? filterColors[kind] : 'text-gray-500'
@@ -73,16 +68,9 @@ export class MenuComponent {
   }
 
   addToCart(plate: Plate) {
-    if (this.order.quantity == null) {
-      this.order.quantity = 1
-    }
+    const finalPlate = new CostumerPlate(plate, this.formOrder)
 
-    if (this.order.observations == null) {
-      this.order.observations = 'Sem observações'
-    }
-
-    console.log(this.order)
-    console.log('plate', plate)
-
+    console.log('preço atualizado', finalPlate.price)
+    console.log(finalPlate)
   }
 }

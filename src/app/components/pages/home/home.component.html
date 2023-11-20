@@ -1,30 +1,27 @@
-<section class="homepage">
-  <header class="homepage_header">
-    <h1>Casa do Pastel</h1>
-    <h3>Pastéis, Tapiocas e Açais feitos na hora!</h3>
-  </header>
-  <ul class="categories">
-    <li
-      *ngFor="let category of categories; index as i"
-      (click)="setGroupFilter(category.info.group)"
-      class="card {{ setStyle(category.info.group, 'border') }}
-    "
-    >
-      <img
-        src="{{ category.img_url }}"
-        class="card_img"
-        alt="{{ category.description }}"
-      />
-      <span class="card_body">
-        <h3 class="{{ setStyle(category.info.group, 'text') }} font-semibold">
-          {{ category.title }}
-        </h3>
-        <p class="card_description">
-          {{ category.description }}
-        </p>
-      </span>
-    </li>
-  </ul>
+<header class="homepage_header">
+  <h1>Casa do Pastel</h1>
+  <h3>Pastéis, Tapiocas e Açais feitos na hora!</h3>
+</header>
+<ul class="categories">
+  <li
+    *ngFor="let category of categories; index as i"
+    (click)="setGroupFilter(category.info.group)"
+    class="card {{ setStyle(category.info.group, 'border') }}"
+  >
+    <img
+      src="{{ category.img_url }}"
+      class="card_img"
+      alt="{{ category.description }}"
+    />
+    <span class="card_body">
+      <h3 class="{{ setStyle(category.info.group, 'text') }} font-semibold">
+        {{ category.title }}
+      </h3>
+      <p class="card_description">
+        {{ category.description }}
+      </p>
+    </span>
+  </li>
+</ul>
 
-  <app-menu [plates]="plates" [groupFilter]="groupFilter"> </app-menu>
-</section>
+<app-menu [plates]="plates" [groupFilter]="groupFilter"></app-menu>

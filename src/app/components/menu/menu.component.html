@@ -7,7 +7,7 @@
   </h3>
 
   <ng-template #saltPlates>
-    <h3 class="text-purple-400 italic">Escolha seu Açaí</h3>
+    <h3 class="text-purple-500 italic">Escolha seu Açaí</h3>
   </ng-template>
 
   <nav *ngIf="groupFilter != 'acai'" class="flex gap-10">
@@ -61,23 +61,28 @@
 
     <ng-template #acaiMenu>
       <li *ngIf="groupFilter === 'acai' && plate.category.group == 'acai'">
-        <h4 class="text-purple-600">
-          {{ plate.title }}
-        </h4>
+        <header class="flex w-full justify-start items-center gap-4">
+          <h4 class="text-purple-500 flex items-center gap-2">
+            {{ plate.title }}
+          </h4>
+          <span class="w-6 bg-gray-300 h-0.5 flex"></span>
+          <p class="text-gray-500 font-semibold italic">
+            {{ plate.price | currency: 'BRL' }}
+          </p>
+        </header>
         <span
           class="flex justify-between w-full items-center text-gray-500 hover:text-gray-700 duration-150 cursor-default"
         >
           <p class="w-3/5 text-ellipsis">{{ plate.description }}</p>
-          <p>{{ plate.price }}</p>
+          <button
+            class="material-icons cursor-pointer hover:swingUp hover:text-3xl"
+            (click)="openModal(plate)"
+          >
+            shopping_cart
+          </button>
         </span>
-        <button
-          class="material-icons cursor-pointer hover:swingUp hover:text-3xl"
-          (click)="openModal(plate)"
-        >
-          shopping_cart
-        </button>
-      </li></ng-template
-    >
+      </li>
+    </ng-template>
   </ng-container>
 </ul>
 
@@ -86,7 +91,7 @@
   *ngIf="modalDisplay"
 >
   <div
-    class="rounded-3xl bg-white shadow-2xl flex flex-col w-fit p-5 gap-4 z-30"
+    class="rounded-3xl bg-white shadow-2xl flex flex-col w-fit p-5 gap-4 z-30 animationFadeIn"
   >
     <header
       class="flex w-full justify-between border-b border-gray-400 py-3 {{
@@ -104,10 +109,10 @@
 
     <form
       (ngSubmit)="addToCart(modalPlate)"
-      class="flex flex-col w-full p-2 gap-3 text-gray-500"
+      class="flex flex-col w-full p-2 gap-5 text-gray-500"
     >
-      <label for="plate" class="flex items-center gap-4">
-        <p>Nome do produto:</p>
+      <label for="plate" class="flex items-center gap-2">
+        <p>Produto:</p>
         <input
           type="text"
           id="plate"
@@ -119,30 +124,39 @@
           }} font-semibold italic"
         />
       </label>
-      <label for="quantity" class="flex items-center gap-4">
+
+      <label for="quantity" class="flex items-center gap-2">
         <p>Quantidade:</p>
         <input
           type="number"
           name="quantity"
           id="quantity"
-          [value]="1"
+          value="1"
           class="{{
             setStyleByKind(modalPlate.category.kind)
           }} font-semibold italic border-2 pl-4 w-16 text-start rounded-full"
           max="20"
-          [(ngModel)]="order.quantity"
+          min="1"
+          [(ngModel)]="formOrder.quantity"
         />
       </label>
-      <label for="observations">
+
+      <label for="observations" class="flex flex-col gap-2">
         <p>Observações:</p>
         <input
           name="observations"
           id="observations"
           placeholder="Exemplo: sem cebola, sem tomate..."
-          class="border rounded min-w-full p-3 text-start align-text-top"
-          [(ngModel)]="order.observations"
+          class="border-2 rounded min-w-full p-3 text-start align-text-top"
+          [(ngModel)]="formOrder.observations"
         />
       </label>
+
+      <p class="text-2xl text-emerald-700 italic text-center font-semibold">
+        {{ modalPlate.price * formOrder.quantity | currency: 'BRL' }}
+      </p>
+
+      <hr />
 
       <button
         type="submit"

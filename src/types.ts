@@ -25,3 +25,9 @@ export type Plate = {
     },
     price: number
 }
+
+export type OrderForm = {
+    name: string,
+    quantity: number,
+    observations: string
+}
