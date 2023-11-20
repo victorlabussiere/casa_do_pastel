@@ -1,5 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Plate, PlateGroups, PlatesKinds } from 'src/types';
+
+export type CostumerForm = {
+  name: string,
+  quantity: number,
+  observations: string
+}
+
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html'
@@ -15,6 +22,8 @@ export class MenuComponent {
 
   modalDisplay: boolean = false
   modalPlate: Plate = {} as Plate
+
+  order: CostumerForm = {} as CostumerForm
 
   constructor() { }
 
@@ -61,5 +70,19 @@ export class MenuComponent {
     }
 
     this.kindFilter = kind
+  }
+
+  addToCart(plate: Plate) {
+    if (this.order.quantity == null) {
+      this.order.quantity = 1
+    }
+
+    if (this.order.observations == null) {
+      this.order.observations = 'Sem observações'
+    }
+
+    console.log(this.order)
+    console.log('plate', plate)
+
   }
 }

@@ -37,9 +37,15 @@
       "
       class="text-gray-400 hover:text-gray-700 text-opacity-50 hover:text-opacity-100 hover:bg-gray-50"
     >
-      <h4 class="{{ setStyleByKind(kindFilter) }}">
-        {{ plate.title }}
-      </h4>
+      <header class="flex w-full justify-start items-center gap-4">
+        <h4 class="{{ setStyleByKind(kindFilter) }} flex items-center gap-2">
+          {{ plate.title }}
+        </h4>
+        <span class="w-6 bg-gray-300 h-0.5 flex"></span>
+        <p class="text-gray-500 font-semibold italic">
+          {{ plate.price | currency: 'BRL' }}
+        </p>
+      </header>
       <span
         class="flex justify-between w-full items-center text-gray-500 hover:text-gray-700 duration-150 cursor-default"
       >
@@ -62,35 +68,88 @@
           class="flex justify-between w-full items-center text-gray-500 hover:text-gray-700 duration-150 cursor-default"
         >
           <p class="w-3/5 text-ellipsis">{{ plate.description }}</p>
-          <button
-            class="material-icons cursor-pointer hover:swingUp hover:text-3xl"
-            (click)="openModal(plate)"
-          >
-            shopping_cart
-          </button>
+          <p>{{ plate.price }}</p>
         </span>
+        <button
+          class="material-icons cursor-pointer hover:swingUp hover:text-3xl"
+          (click)="openModal(plate)"
+        >
+          shopping_cart
+        </button>
       </li></ng-template
     >
   </ng-container>
 </ul>
 
 <article
-  class="absolute top-0 left-0 w-screen h-screen flex items-center justify-center bg-black/30 backdrop-blur-sm"
+  class="absolute top-0 left-0 w-screen h-screen flex items-center justify-center bg-black/30 backdrop-blur-sm z-20"
   *ngIf="modalDisplay"
-  (click)="closeModal()"
 >
-  <div class="rounded-3xl bg-white shadow-2xl flex flex-col w-4/6 p-5 gap-4">
-    <header class="flex w-full justify-between border-b border-gray-400 py-3">
-      <h4>Item: {{ modalPlate.title | titlecase }}</h4>
+  <div
+    class="rounded-3xl bg-white shadow-2xl flex flex-col w-fit p-5 gap-4 z-30"
+  >
+    <header
+      class="flex w-full justify-between border-b border-gray-400 py-3 {{
+        setStyleByKind(modalPlate.category.kind)
+      }}"
+    >
+      <h4>Detalhes</h4>
       <i
         class="material-icons cursor-pointer hover:swingUp duration-150"
         (click)="closeModal()"
       >
-        close</i
-      >
+        close
+      </i>
     </header>
-    <span>
-      <p>Ingredientes: {{ modalPlate.description }}</p>
-    </span>
+
+    <form
+      (ngSubmit)="addToCart(modalPlate)"
+      class="flex flex-col w-full p-2 gap-3 text-gray-500"
+    >
+      <label for="plate" class="flex items-center gap-4">
+        <p>Nome do produto:</p>
+        <input
+          type="text"
+          id="plate"
+          name="plate"
+          value="{{ modalPlate.title }}"
+          [readonly]
+          class="{{
+            setStyleByKind(modalPlate.category.kind)
+          }} font-semibold italic"
+        />
+      </label>
+      <label for="quantity" class="flex items-center gap-4">
+        <p>Quantidade:</p>
+        <input
+          type="number"
+          name="quantity"
+          id="quantity"
+          [value]="1"
+          class="{{
+            setStyleByKind(modalPlate.category.kind)
+          }} font-semibold italic border-2 pl-4 w-16 text-start rounded-full"
+          max="20"
+          [(ngModel)]="order.quantity"
+        />
+      </label>
+      <label for="observations">
+        <p>Observações:</p>
+        <input
+          name="observations"
+          id="observations"
+          placeholder="Exemplo: sem cebola, sem tomate..."
+          class="border rounded min-w-full p-3 text-start align-text-top"
+          [(ngModel)]="order.observations"
+        />
+      </label>
+
+      <button
+        type="submit"
+        class="bg-emerald-400 text-gray-50 px-8 py-3 rounded-xl flex items-start justify-center gap-5 hover:bg-emerald-400/90 duration-150 font-semibold hover:text-white"
+      >
+        Adicionar ao carrinho. <i class="material-icons">add_shopping_cart</i>
+      </button>
+    </form>
   </div>
 </article>
