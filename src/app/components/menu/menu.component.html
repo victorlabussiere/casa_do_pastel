@@ -46,6 +46,7 @@
         <p class="w-3/5 text-ellipsis">{{ plate.description }}</p>
         <button
           class="material-icons cursor-pointer hover:swingUp hover:text-3xl"
+          (click)="openModal(plate)"
         >
           shopping_cart
         </button>
@@ -63,6 +64,7 @@
           <p class="w-3/5 text-ellipsis">{{ plate.description }}</p>
           <button
             class="material-icons cursor-pointer hover:swingUp hover:text-3xl"
+            (click)="openModal(plate)"
           >
             shopping_cart
           </button>
@@ -71,3 +73,24 @@
     >
   </ng-container>
 </ul>
+
+<article
+  class="absolute top-0 left-0 w-screen h-screen flex items-center justify-center bg-black/30 backdrop-blur-sm"
+  *ngIf="modalDisplay"
+  (click)="closeModal()"
+>
+  <div class="rounded-3xl bg-white shadow-2xl flex flex-col w-4/6 p-5 gap-4">
+    <header class="flex w-full justify-between border-b border-gray-400 py-3">
+      <h4>Item: {{ modalPlate.title | titlecase }}</h4>
+      <i
+        class="material-icons cursor-pointer hover:swingUp duration-150"
+        (click)="closeModal()"
+      >
+        close</i
+      >
+    </header>
+    <span>
+      <p>Ingredientes: {{ modalPlate.description }}</p>
+    </span>
+  </div>
+</article>

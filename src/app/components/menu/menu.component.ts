@@ -13,7 +13,20 @@ export class MenuComponent {
   tapiocaList!: Plate[]
   acaiList!: Plate[]
 
+  modalDisplay: boolean = false
+  modalPlate: Plate = {} as Plate
+
   constructor() { }
+
+  openModal(plate: Plate) {
+    this.modalDisplay = true
+    this.modalPlate = plate
+  }
+
+  closeModal() {
+    this.modalDisplay = false
+    this.modalPlate = {} as Plate
+  }
 
   setStyleByKind(kind: string) {
     const filterColors: any = {
