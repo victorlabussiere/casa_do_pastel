@@ -140,6 +140,13 @@
   }
 }
 
+/* CART LIST MENU*/
+@layer components {
+  app-cart-list {
+    @apply absolute bottom-0 right-32 w-3/12 bg-white h-fit shadow-2xl flex flex-col;
+  }
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
