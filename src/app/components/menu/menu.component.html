@@ -26,33 +26,21 @@
   </nav>
 </header>
 
-<ul
-  *ngIf="plates && groupFilter == 'pastel'"
-  class="flex flex-col gap-8 border"
->
-  <li *ngFor="let plate of pastelList" class="rounded">
-    <p>Nome: {{ plate.title }}</p>
-    <p>Descrição: {{ plate.description }}</p>
-    <p>Grupo: {{ plate.category.group }}</p>
-    <p>Tipo: {{ plate.category.kind }}</p>
+<ul *ngIf="plates && groupFilter == 'pastel'">
+  <li *ngFor="let plate of pastelList">
+    <h4>{{ plate.title }}</h4>
+    <p>{{ plate.description }}</p>
   </li>
 </ul>
-<ul
-  *ngIf="plates && groupFilter == 'tapioca'"
-  class="flex flex-col gap-8 border"
->
-  <li *ngFor="let plate of tapiocaList" class="rounded">
-    <p>Nome: {{ plate.title }}</p>
-    <p>Descrição: {{ plate.description }}</p>
-    <p>Grupo: {{ plate.category.group }}</p>
-    <p>Tipo: {{ plate.category.kind }}</p>
+<ul *ngIf="plates && groupFilter == 'tapioca'">
+  <li *ngFor="let plate of tapiocaList">
+    <h4>{{ plate.title }}</h4>
+    <p>{{ plate.description }}</p>
   </li>
 </ul>
-<ul *ngIf="plates && groupFilter == 'acai'" class="flex flex-col gap-8 border">
-  <li *ngFor="let plate of acaiList" class="rounded">
-    <p>Nome: {{ plate.title }}</p>
-    <p>Descrição: {{ plate.description }}</p>
-    <p>Grupo: {{ plate.category.group }}</p>
-    <p>Tipo: {{ plate.category.kind }}</p>
+<ul *ngIf="plates && groupFilter == 'acai'">
+  <li *ngFor="let plate of acaiList">
+    <h4>{{ plate.title }}</h4>
+    <p>{{ plate.description }}</p>
   </li>
 </ul>

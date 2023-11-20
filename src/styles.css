@@ -51,6 +51,10 @@
   h3 {
     @apply font-semibold text-2xl;
   }
+
+  h4 {
+    @apply font-semibold text-lg;
+  }
   .topbar {
     @apply absolute top-0 left-0 w-screen px-32;
     @apply flex items-center justify-between;
@@ -113,5 +117,30 @@
   }
   li.card > .card_body > .card_description {
     @apply italic text-sm text-gray-500;
+  }
+}
+
+/* PLATES MENU*/
+@layer components {
+  app-menu > ul {
+    @apply flex flex-col gap-3;
+  }
+
+  app-menu > ul > li {
+    @apply flex flex-col items-start border-b border-dashed mx-4 py-2;
+  }
+  app-menu > ul > li:hover {
+    @apply swingLeft;
+  }
+
+  app-menu > ul > li > h4 {
+    @apply font-semibold;
+  }
+  app-menu > ul > li > p {
+    @apply font-thin italic;
+  }
+  app-menu > ul > li:hover > h4,
+  app-menu > ul > li:hover > p {
+    @apply text-gray-400;
   }
 }
