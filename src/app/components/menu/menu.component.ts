@@ -12,20 +12,20 @@ export class MenuComponent {
   @Input() groupFilter: PlateGroups | string = 'pastel'
   kindFilter: PlatesKinds = 'salgado'
 
-  pastelList!: Plate[]
-  tapiocaList!: Plate[]
-  acaiList!: Plate[]
-
+  modalButtonConfirmation: boolean = false
   modalDisplay: boolean = false
   modalPlate: Plate = {} as Plate
 
-  formOrder: OrderForm = { quantity: 1, observations: "" } as OrderForm
+  costumerOrder: OrderForm = { quantity: 1, observations: "" } as OrderForm
 
   constructor(private cartService: CartService) { }
 
   openModal(plate: Plate) {
-    this.modalDisplay = true
+    this.modalButtonConfirmation = false
+    this.costumerOrder.observations = ''
+    this.costumerOrder.quantity = 1
     this.modalPlate = plate
+    this.modalDisplay = true
   }
 
   closeModal() {
@@ -35,11 +35,20 @@ export class MenuComponent {
 
   setStyleByKind(kind: string) {
     const filterColors: any = {
-      salgado: 'text-amber-600',
+      salgado: 'text-yellow-500',
       doce: 'text-pink-500'
     }
 
     return kind === this.kindFilter ? filterColors[kind] : 'text-gray-500'
+  }
+
+  setStyleBtGroup(group: string) {
+    let groups: any = {
+      pastel: 'text-amber-600',
+      tapioca: 'text-cyan-600',
+      acai: 'text-purple-500'
+    }
+    return group === this.groupFilter ? groups[group] : 'text-gray-500'
   }
 
   setTitleByGroup(group: string, kind: string) {
@@ -54,6 +63,7 @@ export class MenuComponent {
       },
       acai: {
         doce: "Açaí",
+        salgado: "Açaí",
       }
     }
 
@@ -69,10 +79,11 @@ export class MenuComponent {
   }
 
   addToCart(plate: Plate) {
-    const finalPlate = new CostumerPlate(plate, this.formOrder)
+    const finalPlate = new CostumerPlate(plate, this.costumerOrder)
     this.cartService.add(finalPlate)
-    this.modalDisplay = !this.modalDisplay
-    this.formOrder.observations = ''
-    this.formOrder.quantity = 1
+    this.modalButtonConfirmation = true
+    setTimeout(() => {
+      this.modalDisplay = !this.modalDisplay
+    }, 700);
   }
 }

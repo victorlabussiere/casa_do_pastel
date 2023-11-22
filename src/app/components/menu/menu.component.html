@@ -60,7 +60,10 @@
     </li>
 
     <ng-template #acaiMenu>
-      <li *ngIf="groupFilter === 'acai' && plate.category.group == 'acai'">
+      <li
+        *ngIf="groupFilter === 'acai' && plate.category.group == 'acai'"
+        class="text-gray-400 hover:text-gray-700 text-opacity-50 hover:text-opacity-100 hover:bg-gray-50"
+      >
         <header class="flex w-full justify-start items-center gap-4">
           <h4 class="text-purple-500 flex items-center gap-2">
             {{ plate.title }}
@@ -91,16 +94,16 @@
   *ngIf="modalDisplay"
 >
   <div
-    class="rounded-3xl bg-white shadow-2xl flex flex-col w-fit p-5 gap-4 z-30 modalContainerAnimation"
+    class="w-96 rounded-3xl bg-white shadow-2xl flex flex-col p-5 gap-4 z-30 modalContainerAnimation"
   >
     <header
       class="flex w-full justify-between border-b border-gray-400 py-3 {{
-        setStyleByKind(modalPlate.category.kind)
+        setStyleBtGroup(modalPlate.category.group)
       }}"
     >
-      <h4>Detalhes</h4>
+      <h4>{{ setTitleByGroup(groupFilter, kindFilter) | titlecase }}</h4>
       <i
-        class="material-icons cursor-pointer hover:swingUp duration-150"
+        class="material-icons text-gray-500 cursor-pointer hover:swingUp duration-150"
         (click)="closeModal()"
       >
         close
@@ -134,10 +137,10 @@
           value="1"
           class="{{
             setStyleByKind(modalPlate.category.kind)
-          }} font-semibold italic border-2 pl-4 w-16 text-start rounded-full"
+          }} font-semibold italic text-start rounded-full"
           max="20"
           min="1"
-          [(ngModel)]="formOrder.quantity"
+          [(ngModel)]="costumerOrder.quantity"
         />
       </label>
 
@@ -148,22 +151,32 @@
           id="observations"
           placeholder="Exemplo: sem cebola, sem tomate..."
           class="border-2 rounded min-w-full p-3 text-start align-text-top"
-          [(ngModel)]="formOrder.observations"
+          [(ngModel)]="costumerOrder.observations"
         />
       </label>
 
       <p class="text-2xl text-emerald-700 italic text-center font-semibold">
-        {{ modalPlate.price * formOrder.quantity | currency: 'BRL' }}
+        {{ modalPlate.price * costumerOrder.quantity | currency: 'BRL' }}
       </p>
 
       <hr />
 
-      <button
-        type="submit"
-        class="bg-emerald-400 text-gray-50 px-8 py-3 rounded-xl flex items-start justify-center gap-5 hover:bg-emerald-400/90 duration-150 font-semibold hover:text-white"
-      >
-        Adicionar ao carrinho. <i class="material-icons">add_shopping_cart</i>
-      </button>
+      <ng-container *ngIf="!modalButtonConfirmation; confirmedTemplate">
+        <button
+          type="submit"
+          class="bg-emerald-400 text-gray-50 px-8 py-3 rounded-xl flex items-start justify-center gap-2 hover:bg-emerald-400/90 duration-150 font-semibold hover:text-white"
+        >
+          Adicionar ao carrinho!<i class="material-icons">shopping_cart </i>
+        </button>
+      </ng-container>
+      <ng-container *ngIf="modalButtonConfirmation">
+        <button
+          disabled
+          class="bg-emerald-500 text-gray-50 px-8 py-3 rounded-xl flex items-start justify-center gap-2 hover:bg-emerald-500/90 duration-150 font-semibold hover:text-white"
+        >
+          Produto adicionado! <i class="material-icons">check</i>
+        </button>
+      </ng-container>
     </form>
   </div>
 </article>
